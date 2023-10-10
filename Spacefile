@@ -1,0 +1,9 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: contacts_be
+    src: .
+    engine: nodejs16
+    primary: true
+    run: node index.js
+    dev: npm run dev
