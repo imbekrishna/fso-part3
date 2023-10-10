@@ -1,0 +1,38 @@
+# POST new person with valid body
+POST http://localhost:3001/api/persons HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "GuiltFoyle",
+    "number": "000-0000-000"
+}
+
+###
+# POST with missing number
+POST http://localhost:3001/api/persons HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Jordan"
+}
+
+
+###
+# POST with missing number
+POST http://localhost:3001/api/persons HTTP/1.1
+Content-Type: application/json
+
+{
+    "number": "444-444-4444"
+}
+
+
+###
+# POST with existing name
+POST http://localhost:3001/api/persons HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "GuiltFoyle",
+    "number": "444-444-4444"
+}
