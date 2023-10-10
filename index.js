@@ -27,6 +27,12 @@ let persons = [
   },
 ];
 
+app.get("/info", (request, response) => {
+  const count = persons.length;
+  const date = new Date();
+  response.send(`<p>Phonebook has info for ${count} people</p><p>${date}</p>`);
+});
+
 app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
@@ -43,10 +49,12 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
-app.get("/info", (request, response) => {
-  const count = persons.length;
-  const date = new Date();
-  response.send(`<p>Phonebook has info for ${count} people</p><p>${date}</p>`);
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+
+  persons = persons.filter((p) => p.id !== id);
+
+  response.status(204).end();
 });
 
 const PORT = 3001;

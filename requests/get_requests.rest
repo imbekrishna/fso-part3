@@ -1,0 +1,17 @@
+# GET phonebook info
+GET http://localhost:3001/info HTTP/1.1
+
+
+###
+# GET all phonebook entries
+GET http://localhost:3001/api/persons HTTP/1.1
+
+
+###
+# GET a single valid resource
+GET http://localhost:3001/api/persons/1 HTTP/1.1
+
+
+###
+# GET a single invalid resource
+GET http://localhost:3001/api/persons/100 HTTP/1.1
