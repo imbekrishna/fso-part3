@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
-const { generateId, personExists } = require("./helpers/persons");
 const cors = require("cors");
 const Person = require("./models/person");
 
@@ -18,29 +17,6 @@ app.use(
         ":method :url :status :res[content-length] - :response-time ms :body"
     )
 );
-
-let persons = [
-    {
-        id: 1,
-        name: "Arto Hellas",
-        number: "040-123456",
-    },
-    {
-        id: 2,
-        name: "Ada Lovelace",
-        number: "39-44-5323523",
-    },
-    {
-        id: 3,
-        name: "Dan Abramov",
-        number: "12-43-234345",
-    },
-    {
-        id: 4,
-        name: "Mary Poppendieck",
-        number: "39-23-6423122",
-    },
-];
 
 app.get("/info", (request, response) => {
     const count = Person.count().then((count) => {
@@ -63,28 +39,20 @@ app.get("/api/persons/:id", (request, response, next) => {
         .catch((error) => next(error));
 });
 
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", (request, response, next) => {
     const body = request.body;
-
-    if (!body.name) {
-        return response.status(400).json({ error: "name missing" });
-    }
-    if (!body.number) {
-        return response.status(400).json({ error: "number missing" });
-    }
-
-    // if (personExists(persons, body.name)) {
-    //     return response.status(400).json({ error: "name must be unique" });
-    // }
 
     const newPerson = Person({
         name: body.name,
         number: body.number,
     });
 
-    newPerson.save().then((person) => {
-        response.json(person);
-    });
+    newPerson
+        .save()
+        .then((person) => {
+            response.json(person);
+        })
+        .catch((error) => next(error));
 });
 
 app.put("/api/persons/:id", (request, response, next) => {
@@ -117,6 +85,8 @@ const errorHandler = (error, request, response, next) => {
 
     if (error.name === "CastError") {
         return response.status(400).send({ error: "malformatted id" });
+    } else if (error.name === "ValidationError") {
+        return response.status(400).send({ error: error.message });
     }
 
     next(error);
