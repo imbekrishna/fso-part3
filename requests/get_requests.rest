@@ -9,7 +9,7 @@ GET http://localhost:3001/api/persons HTTP/1.1
 
 ###
 # GET a single valid resource
-GET http://localhost:3001/api/persons/1 HTTP/1.1
+GET http://localhost:3001/api/persons/65262c0f24fe30bca4650942 HTTP/1.1
 
 
 ###

@@ -1,2 +1,6 @@
-# DELETE a resource
+# DELETE a resource with invalid id
 DELETE http://localhost:3001/api/persons/1 HTTP/1.1
+
+###
+# DELETE a resource with valid id
+DELETE http://localhost:3001/api/persons/65264ed02117fb054c84cb13 HTTP/1.1
