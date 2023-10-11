@@ -7,3 +7,7 @@ micros:
     primary: true
     run: node index.js
     dev: npm run dev
+    presets:
+      env:
+        - name: MONGODB_URI
+          description: "MongoDB connection string"

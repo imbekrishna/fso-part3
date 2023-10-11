@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
     "name": "GuiltFoyle",
-    "number": "444-444-4444"
+    "number": "44-4444444"
 }
 
 ###
@@ -44,5 +44,5 @@ Content-Type: application/json
 
 {
     "name": "To",
-    "number": "000-0000-000"
+    "number": "000-0000000"
 }
